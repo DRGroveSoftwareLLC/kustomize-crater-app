@@ -20,6 +20,21 @@ spec:
         runAsUser: 1000
         runAsGroup: 1000
         fsGroup: 1000
+      initContainers:
+        - name: link-storage
+          image: drgrovellc/crater-app
+          command:
+            - php
+          args:
+            - artisan
+            - storage:link
+        - name: key-generate
+          image: drgrovellc/crater-app
+          command:
+            - php
+          args:
+            - artisan
+            - key:generate
       containers:
         - name: crater-app
           image: drgrovellc/crater-app
