@@ -1,0 +1,5 @@
+FROM drgrovellc/crater-app:6.0.6 as crater-app
+
+FROM nginxinc/nginx-unprivileged:1.25.3-bookworm-perl@sha256:eff4df1c2d00e87c629612a4219046592fd5a537324247f8c85cb2945565b914
+
+COPY --from=crater-app --chown=101:101 /var/www/ /usr/share/nginx/html/

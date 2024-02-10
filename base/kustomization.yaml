@@ -7,6 +7,10 @@ resources:
   - check-invoice-status.cronjob.yaml
   - deployment.yaml
   - service.yaml
+configMapGenerator:
+  - name: nginx-config
+    files:
+      - ./files/php-fpm.conf
 images:
   - name: drgrovellc/crater-app
     newTag: 6.0.6@sha256:2a5eb3b70d592da397df0e9a651c2d86be44e9d45bd3fb81a8de7d4a03f2e131

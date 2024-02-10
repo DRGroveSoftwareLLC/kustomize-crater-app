@@ -36,10 +36,21 @@ spec:
             - artisan
             - key:generate
       containers:
-        - name: crater-app
+        - name: app
           image: drgrovellc/crater-app
-          ports:
-            - name: fastcgi
-              containerPort: 9000
           securityContext:
             allowPrivilegeEscalation: false
+        - name: nginx
+          image: drgrovellc/crater-app-nginx
+          ports:
+            - name: http
+              containerPort: 8080
+          volumeMounts:
+            - name: nginx-config
+              mountPath: /etc/nginx/conf.d/php-fpm.conf
+              subPath: php-fpm.conf
+      volumes:
+        - name: nginx-config
+          configMap:
+            name: nginx-config
+
