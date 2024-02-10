@@ -16,10 +16,6 @@ spec:
         app.kubernetes.io/name: crater-app
         app.kubernetes.io/component: server
     spec:
-      securityContext:
-        runAsUser: 1000
-        runAsGroup: 1000
-        fsGroup: 1000
       initContainers:
         - name: link-storage
           image: drgrovellc/crater-app
@@ -42,6 +38,8 @@ spec:
             allowPrivilegeEscalation: false
         - name: nginx
           image: drgrovellc/crater-app-nginx
+          securityContext:
+            allowPrivilegeEscalation: false
           ports:
             - name: http
               containerPort: 8080
