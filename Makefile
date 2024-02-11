@@ -21,3 +21,12 @@ images/crater-app/build: images/crater-app-base/build
 		--build-arg CRATER_APP_VERSION=$(CRATER_APP_VERSION) \
 		-t drgrovellc/crater-app:$(CRATER_APP_VERSION) \
 		.
+
+.PHONY: images/crater-app-nginx/build
+images/crater-app-nginx/build:
+	docker build \
+		--build-arg user=crater-user \
+		--build-arg CRATER_APP_VERSION=$(CRATER_APP_VERSION) \
+		-t drgrovellc/crater-app-nginx:$(CRATER_APP_VERSION) \
+		-f Dockerfile.nginx \
+		.

@@ -16,37 +16,14 @@ spec:
         app.kubernetes.io/name: crater-app
         app.kubernetes.io/component: server
     spec:
-      initContainers:
-        - name: link-storage
-          image: drgrovellc/crater-app
-          command:
-            - php
-          args:
-            - artisan
-            - storage:link
-        - name: key-generate
-          image: drgrovellc/crater-app
-          command:
-            - php
-          args:
-            - artisan
-            - key:generate
       containers:
         - name: app
-          image: drgrovellc/crater-app
-          securityContext:
-            allowPrivilegeEscalation: false
-        - name: nginx
-          image: drgrovellc/crater-app-nginx
+          image: invoiceshelf/invoiceshelf
           securityContext:
             allowPrivilegeEscalation: false
           ports:
             - name: http
-              containerPort: 8080
-          volumeMounts:
-            - name: nginx-config
-              mountPath: /etc/nginx/conf.d/default.conf
-              subPath: php-fpm.conf
+              containerPort: 80
       volumes:
         - name: nginx-config
           configMap:
