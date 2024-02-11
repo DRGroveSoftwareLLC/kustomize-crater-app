@@ -3,8 +3,8 @@ kind: Kustomization
 commonLabels:
   app.kubernetes.io/part-of: crater-app
 resources:
-  - check-estimates-status.cronjob.yaml
-  - check-invoice-status.cronjob.yaml
+  # - check-estimates-status.cronjob.yaml
+  # - check-invoice-status.cronjob.yaml
   - deployment.yaml
   - service.yaml
 configMapGenerator:
@@ -12,5 +12,5 @@ configMapGenerator:
     files:
       - ./files/php-fpm.conf
 images:
-  - name: drgrovellc/crater-app
-    newTag: 6.0.6@sha256:2a5eb3b70d592da397df0e9a651c2d86be44e9d45bd3fb81a8de7d4a03f2e131
+  - name: invoiceshelf/invoiceshelf
+    newTag: 1.0.0@sha256:0438c22ff371bbc6b910e9d4b6288f00036e1fe3313ce9224c0942ab5e57dbb0
